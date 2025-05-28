@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    
+    int K,L,m;
+    cin>>K>>L>>m;
+
+    vector<bool> dp(1e6+5,0);
+    dp[1]=1;
+    dp[K]=1;
+    dp[L]=1;
+
+    for(int i=2;i<=1e6;i++){
+        if(i==K || i==L) continue;
+
+        dp[i]=!(dp[i-1] and ((i-K>=1) ? dp[i-K] : 1) and ((i-L>=1) ? dp[i-L] : 1) );
+    }
+
+    for(int i=0;i<m;i++){
+        int n;
+        cin>>n;
+
+        if(dp[n]==1) cout<<"A";
+        else cout<<"B";
+    }
+
+    return 0;
+}
